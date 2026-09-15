@@ -1,21 +1,17 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 import { HeroBanner } from './components/HeroBanner/HeroBanner'
+import { ProductsCarousel } from './components/ProductsCarousel/ProductsCarousel'
+import { ProductTile } from './components/ProductTile/ProductTile';
+import { useProducts } from './hooks/products/useProducts';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { allProducts } = useProducts();
 
   return (
-    <>
-      <section id="center">
-        <div>
-          <HeroBanner title='BAKERY ECOMMERCE' subTitle='Lorem ipsum lorem ipsum' />
-        </div>
-      </section>
-    </>
+    <div>
+      <HeroBanner title='BAKERY ECOMMERCE' subTitle='Lorem ipsum lorem ipsum' />
+      <ProductsCarousel products={allProducts} />
+    </div>
   )
 }
 
