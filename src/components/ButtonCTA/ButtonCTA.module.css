@@ -1,0 +1,13 @@
+.button {
+    text-decoration: none;
+    color: #fff
+}
+
+.primaryButton {
+    composes: button;
+    background-color: #402822;
+
+    &:hover {
+        background-color: #634037;
+    }
+}
