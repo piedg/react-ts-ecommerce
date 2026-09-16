@@ -9,11 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import arrowLeftIcon from "../../assets/icons/left-arrow.png";
 import arrowRightIcon from "../../assets/icons/right-arrow.png";
-
-type ProductsCarouselProps = {
-    products?: Product[];
-    title?: string,
-}
+import type { Category } from "../../types/Category";
 
 type ArrowProps = {
     action: () => void,
@@ -32,9 +28,16 @@ function CarouselArrow({ action, alt, icon }: ArrowProps) {
     );
 }
 
-export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
+type ProductsCarouselProps = {
+    products: Product[];
+    category: Category
+    title?: string,
+}
+
+export function ProductsCarousel({ products, category, title }: ProductsCarouselProps) {
     const sliderRef = useRef<Slider>(null)
-    const productsSliced = products?.slice(0, 8)
+    const productsFiltered = products.filter((product) => product.category === category)
+    const productsSliced = productsFiltered?.slice(0, 8) // PRODOTTI MAX DA MOSTRARE -> taglia la chiamata dal primo elemento fino a X
 
     const settings = {
         dots: true,
@@ -50,6 +53,7 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
+                    dots: false,
                 }
             },
             {
@@ -64,7 +68,10 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    initialSlide: 0
+                    initialSlide: 0,
+                    centerMode: false,
+                    centerPadding: "0px",
+                    dots: false,
                 }
             }
         ]
@@ -73,23 +80,26 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
     return (
         <div className="relative">
             <div className="mb-5 h-10">
-                <h3 className="text-5xl">
-                    {title}
+                <h3 className="text-2xl md:text-4xl lg:text-5xl">
+                    <b>{title}</b>
                 </h3>
-                <div className="absolute top-0 right-0 flex items-center gap-3 z-10">
+                <div className="absolute md:top-0 right-0 flex items-center gap-3 z-10">
                     <CarouselArrow action={() => sliderRef.current?.slickPrev()} alt="Prev Arrow" icon={arrowLeftIcon} />
                     <CarouselArrow action={() => sliderRef.current?.slickNext()} alt="Next Arrow" icon={arrowRightIcon} />
-                    <Link to="/category/beauty" className="leading-none flex items-center"><b>Show More</b></Link>
+                    <Link to={`/category/${category}`} className="leading-none flex items-center"><b>Show More</b></Link>
                 </div>
             </div>
-            <Slider ref={sliderRef} {...settings}>
-                {
-                    productsSliced?.map((product) => (
+            <div >
+                <Slider ref={sliderRef} {...settings}>
+                    {
+                        productsSliced?.map((product) => (
 
-                        <ProductTile key={product.id} product={product} />
-                    ))
-                }
-            </Slider>
+                            <ProductTile key={product.id} product={product} />
+                        ))
+                    }
+                </Slider>
+            </div>
+
         </div>
     )
 }

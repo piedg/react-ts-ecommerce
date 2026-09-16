@@ -8,9 +8,13 @@ export function Homepage() {
     const allProducts = useLoaderData() as Product[]
     return (
         <>
-            <HeroBanner title='BAKERY ECOMMERCE' subTitle='Lorem ipsum lorem ipsum' />
+            <HeroBanner title="EVERYTHING, EVERYWHERE, 
+             ALL AT ONCE ECOMMERCE" subTitle="Lorem ipsum lorem ipsum" />
             <SectionContainer>
-                <ProductsCarousel products={allProducts} title="OUR BEAUTY PRODUCTS" />
+                <ProductsCarousel products={allProducts} title="OUR BEAUTY PRODUCTS" category={"beauty"} />
+            </SectionContainer>
+            <SectionContainer>
+                <ProductsCarousel products={allProducts} title="THE BEST FOOD" category={"groceries"} />
             </SectionContainer>
         </>
     )

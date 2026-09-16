@@ -6,7 +6,7 @@ type SectionContainerProps = {
 
 export function SectionContainer({ children }: SectionContainerProps) {
     return (
-        <div className="m-20">
+        <div className="m-5 md:m-20">
             {children}
         </div>
     )

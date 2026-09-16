@@ -3,6 +3,7 @@ import type { Product } from "../types/Product"
 import { ProductsCarousel } from "../components/ProductsCarousel/ProductsCarousel"
 import { capitalize } from "../utils/capitalize"
 import { SectionContainer } from "../components/SectionContainer/SectionContainer"
+import type { Category } from "../types/Category"
 
 export function CategoryPage() {
     const products = useLoaderData() as Product[]
@@ -12,7 +13,7 @@ export function CategoryPage() {
         <div>
             <h1 className="text-4xl text-center">{capitalize(categoryName ?? "")}</h1>
             <SectionContainer>
-                <ProductsCarousel products={products} />
+                <ProductsCarousel products={products} category={categoryName as Category} />
             </SectionContainer>
         </div>
     )
