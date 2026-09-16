@@ -8,7 +8,9 @@ export function Homepage() {
     return (
         <>
             <HeroBanner title='BAKERY ECOMMERCE' subTitle='Lorem ipsum lorem ipsum' />
-            <ProductsCarousel products={allProducts} title="Carousel Title" />
+            <section className="mx-20">
+                <ProductsCarousel products={allProducts} title="OUR BEAUTY PRODUCTS" />
+            </section>
         </>
     )
 }
