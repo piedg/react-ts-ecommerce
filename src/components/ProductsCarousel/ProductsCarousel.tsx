@@ -1,4 +1,5 @@
 import type { Product } from "../../types/Product";
+import { ProductTile } from "../ProductTile/ProductTile";
 
 type ProductsCarouselProps = {
     products?: Product[];
@@ -6,24 +7,20 @@ type ProductsCarouselProps = {
 }
 
 export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
+    const productsSliced = products?.slice(0, 4)
 
-    console.log("products", products)
     return (
-        <div >
-            <h3>
+        <div>
+            <h3 className="text-5xl">
                 {title}
             </h3>
             <div className="flex row flex-wrap justify-center content-center">
                 {
-                    products?.map((product) => (
-                        <div key={product.id} className="bg-amber-200 m-1">
-                            <p>{product.title} <span>{product.price} €</span></p>
-                            <img src={product.thumbnail} />
-                        </div>
+                    productsSliced?.map((product) => (
+                        <ProductTile key={product.id} product={product} />
                     ))
                 }
             </div>
-
         </div>
     )
 }

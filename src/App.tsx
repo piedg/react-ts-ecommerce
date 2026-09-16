@@ -1,4 +1,8 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { NavHeader } from './components/NavHeader/NavHeader';
+import { Navbar } from './components/Navbar/Navbar';
+import { Footer } from './components/Footer/Footer';
+
 import './App.css'
 
 
@@ -6,21 +10,10 @@ function App() {
 
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/category/smartphones">Smartphones</Link>
-          </li>
-          <li>
-            <Link to="/category/beauty">Beauty</Link>
-          </li>
-          <li>
-            <Link to="/category/groceries">Groceries</Link>
-          </li>
-        </ul>
-      </nav>
+      <NavHeader />
+      <Navbar />
       <Outlet />
-      <footer>Footer</footer>
+      <Footer />
     </>
   )
 }

@@ -9,7 +9,7 @@ export function CategoryPage() {
 
     return (
         <div>
-            <h1 className="text-4xl">{capitalize(categoryName ?? "")}</h1>
+            <h1 className="text-4xl text-center">{capitalize(categoryName ?? "")}</h1>
             <ProductsCarousel products={products} />
         </div>
     )
