@@ -7,6 +7,7 @@ type ProductsCarouselProps = {
 
 export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
 
+    console.log("products", products)
     return (
         <div >
             <h3>

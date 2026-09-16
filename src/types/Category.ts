@@ -1,1 +1,1 @@
-export type Category = "beauty" | "fragrances" | "furniture" | "groceries"
+export type Category = "beauty" | "fragrances" | "furniture" | "groceries" | "smartphones"

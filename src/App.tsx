@@ -1,17 +1,27 @@
+import { Link, Outlet } from 'react-router-dom';
 import './App.css'
-import { HeroBanner } from './components/HeroBanner/HeroBanner'
-import { ProductsCarousel } from './components/ProductsCarousel/ProductsCarousel'
-import { ProductTile } from './components/ProductTile/ProductTile';
-import { useProducts } from './hooks/products/useProducts';
+
 
 function App() {
-  const { allProducts } = useProducts();
 
   return (
-    <div>
-      <HeroBanner title='BAKERY ECOMMERCE' subTitle='Lorem ipsum lorem ipsum' />
-      <ProductsCarousel products={allProducts} />
-    </div>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/category/smartphones">Smartphones</Link>
+          </li>
+          <li>
+            <Link to="/category/beauty">Beauty</Link>
+          </li>
+          <li>
+            <Link to="/category/groceries">Groceries</Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
+      <footer>Footer</footer>
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Product } from "../../types/Product";
-import type { DummyJSONProductResponse, DummyJSONResponse } from "../../types/DummyJsonResponse";
+import type { DummyJSONResponse } from "../../types/DummyJsonResponse";
 
 async function fetchAPI<T>(url: string, signal?: AbortSignal): Promise<T> {
     const response = await fetch(url, { signal })
@@ -42,51 +42,11 @@ export function useProductsState() {
         return () => controller.abort()
     }, [])
 
-    async function getProductsWithLimit(limit: number) {
-        const controller = new AbortController()
-
-        try {
-            setIsLoading(true)
-            setError(null)
-            const data = await fetchAPI<DummyJSONResponse>(`https://dummyjson.com/products?limit=${limit}`, controller.signal)
-
-        }
-        catch (err: unknown) {
-            if (err instanceof Error) {
-                setError(err.message)
-            }
-        } finally {
-            setIsLoading(false)
-        }
-
-        return () => controller.abort()
-    }
-
-    async function getProductById(id: number) {
-        const controller = new AbortController()
-
-        try {
-            setIsLoading(true)
-            setError(null)
-            const data = await fetchAPI<DummyJSONProductResponse>(`https://dummyjson.com/products/${id}`, controller.signal)
-        }
-        catch (err: unknown) {
-            if (err instanceof Error) {
-                setError(err.message)
-            }
-        } finally {
-            setIsLoading(false)
-        }
-
-        return () => controller.abort()
-    }
 
     return {
         allProducts,
         setAllProducts,
         isLoading,
-        error,
-        getProductsWithLimit,
-        getProductById,
+        error
     }
 }
