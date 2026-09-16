@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 import type { Product } from "../../types/Product";
 import { ProductTile } from "../ProductTile/ProductTile";
 import Slider from "react-slick"
@@ -5,36 +7,34 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import arrowLeftIcon from "../../assets/icons/left-arrow.png";
+import arrowRightIcon from "../../assets/icons/right-arrow.png";
+
 type ProductsCarouselProps = {
     products?: Product[];
     title?: string,
 }
 
-function NextArrow(props: any) {
-    const { onClick } = props;
-    return (
-        <button
-            onClick={onClick}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full p-2"
-        >
-            →
-        </button>
-    );
+type ArrowProps = {
+    action: () => void,
+    alt?: string,
+    icon?: string,
 }
 
-function PrevArrow(props: any) {
-    const { onClick } = props;
+function CarouselArrow({ action, alt, icon }: ArrowProps) {
     return (
         <button
-            onClick={onClick}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full p-2"
+            onClick={action}
+            className="text-black p-2 cursor-pointer"
         >
-            ←
+            <img src={icon} alt={alt} className="w-5 h-5" />
         </button>
     );
 }
 
 export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
+    const sliderRef = useRef<Slider>(null)
+    const productsSliced = products?.slice(0, 8)
 
     const settings = {
         dots: true,
@@ -43,6 +43,7 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
         slidesToShow: 4,
         slidesToScroll: 1,
         centerMode: true,
+        arrows: false,
         responsive: [
             {
                 breakpoint: 1200,
@@ -69,14 +70,19 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
         ]
     }
 
-    const productsSliced = products?.slice(0, 8)
-
     return (
-        <div>
-            <h3 className="text-5xl">
-                {title}
-            </h3>
-            <Slider {...settings}>
+        <div className="relative">
+            <div className="mb-5 h-10">
+                <h3 className="text-5xl">
+                    {title}
+                </h3>
+                <div className="absolute top-0 right-0 flex items-center gap-3 z-10">
+                    <CarouselArrow action={() => sliderRef.current?.slickPrev()} alt="Prev Arrow" icon={arrowLeftIcon} />
+                    <CarouselArrow action={() => sliderRef.current?.slickNext()} alt="Next Arrow" icon={arrowRightIcon} />
+                    <Link to="/category/beauty" className="leading-none flex items-center"><b>Show More</b></Link>
+                </div>
+            </div>
+            <Slider ref={sliderRef} {...settings}>
                 {
                     productsSliced?.map((product) => (
 
@@ -84,10 +90,6 @@ export function ProductsCarousel({ products, title }: ProductsCarouselProps) {
                     ))
                 }
             </Slider>
-
-
-            <div className="flex row flex-wrap justify-center content-center">
-            </div>
         </div>
     )
 }

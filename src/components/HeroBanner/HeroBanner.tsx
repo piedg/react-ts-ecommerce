@@ -8,7 +8,8 @@ type HeroBannerProps = {
 
 export function HeroBanner(props: HeroBannerProps) {
     return (
-        <div className="flex flex-col gap-5 justify-center items-center text-amber-50">
+        <div className="relative flex flex-col gap-5 justify-center items-center text-amber-50 h-screen">
+            <img src="https://dummyjson.com/image/1920x1080" alt="Hero Banner image" className="absolute inset-0 w-full h-full object-cover -z-10" />
             <div className="text-center">
                 <h1 className="text-5xl">{props.title}</h1>
                 <p>{props.subTitle}</p>

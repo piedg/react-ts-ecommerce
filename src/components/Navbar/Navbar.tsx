@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export function Navbar() {
     return (
-        <nav className="bg-red-400">
-            <ul>
+        <nav className="flex row justify-center items-center h-15 ">
+            <ul className="flex row w-full justify-evenly font-bold">
                 <li>
                     <Link to="/">Home</Link>
                 </li>
