@@ -7,9 +7,9 @@ type ProductTileProps = {
 export function ProductTile({ product }: ProductTileProps) {
 
     return (
-        <div className="m-1 md:w-75 lg:150">
-            <div className="bg-orange-100 p-5">
-                <img src={product?.thumbnail} />
+        <div className="m-1">
+            <div className="bg-orange-100 p-5 aspect-square flex items-center justify-center">
+                <img src={product?.thumbnail} className="w-full h-full object-contain" />
             </div>
             <p><b>{product?.title}</b></p>
             <p className="text-gray-400">{product?.price} €</p>

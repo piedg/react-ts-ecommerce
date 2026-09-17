@@ -6,10 +6,10 @@ import App from './App.tsx'
 import { ProductsProvider } from './context/ProductContext.tsx'
 import { Homepage } from './pages/Homepage';
 import { LandingPage } from './pages/LandingPage';
-import { productsLoader } from './loader/productsLoader.ts';
 import { ErrorPage } from './pages/ErrorPage.tsx';
 import { CategoryPage } from './pages/CategoryPage.tsx';
-import { categoryLoader } from './loader/categoryLoader.ts';
+import { productsLoader } from './loaders/productsLoader.ts';
+import { categoryLoader } from './loaders/categoryLoader.ts';
 
 const router = createBrowserRouter([
   {

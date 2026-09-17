@@ -6,6 +6,7 @@ import { SectionContainer } from "../components/SectionContainer/SectionContaine
 
 export function Homepage() {
     const allProducts = useLoaderData() as Product[]
+
     return (
         <>
             <HeroBanner title="EVERYTHING, EVERYWHERE, 
