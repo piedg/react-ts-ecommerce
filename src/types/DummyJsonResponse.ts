@@ -7,6 +7,3 @@ export type DummyJSONResponse = {
     limit: number
 }
 
-export type DummyJSONProductResponse = {
-    product: Product
-}

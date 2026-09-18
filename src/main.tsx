@@ -12,6 +12,7 @@ import { productsLoader } from './loaders/productsLoader.ts';
 import { categoryLoader } from './loaders/categoryLoader.ts';
 import { Provider } from 'react-redux';
 import { store } from './state/store.ts';
+import { ProductPage } from './pages/ProductPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: "category/:categoryName",
         element: <CategoryPage />,
         loader: categoryLoader
+      },
+      {
+        path: "products/:id",
+        element: <ProductPage />
       }
     ]
   }

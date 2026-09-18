@@ -5,17 +5,21 @@ import { Footer } from './components/Footer/Footer';
 
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from './state/store';
+import { type AppDispatch, type RootState } from './state/store';
 import { SectionContainer } from './components/SectionContainer/SectionContainer';
-import { addProduct, renameProduct } from './state/products/productsSlice';
+import { addProduct, renameProduct, getProductsAsync, getProductsByCategoryAsync } from './state/products/productsSlice';
 import { ProductsCarousel } from './components/ProductsCarousel/ProductsCarousel';
+import { useEffect } from 'react';
 
 
 function App() {
-  const products = useSelector((state: RootState) => state.products)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
+  const { products, productsByCategory } = useSelector((state: RootState) => state.products)
 
-  console.log("Products", products)
+  useEffect(() => {
+    dispatch(getProductsAsync())
+    dispatch(getProductsByCategoryAsync("smartphones"))
+  }, [dispatch])
 
   return (
     <>
@@ -39,11 +43,8 @@ function App() {
         }))}>Add Product</button>
       </SectionContainer>
       <SectionContainer>
-        <ProductsCarousel products={products} category='smartphones' />
+        <ProductsCarousel products={productsByCategory} category='smartphones' />
       </SectionContainer>
-      {/*<SectionContainer>
-        <ProductTile product={products[0]} />
-      </SectionContainer> */}
       <Footer />
     </>
   )
