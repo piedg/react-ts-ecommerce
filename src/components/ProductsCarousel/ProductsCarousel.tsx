@@ -29,15 +29,19 @@ function CarouselArrow({ action, alt, icon }: ArrowProps) {
 }
 
 type ProductsCarouselProps = {
-    products: Product[];
+    products: Product[]
     category: Category
-    title?: string,
+    title?: string
+    hasShowMore?: boolean
 }
 
-export function ProductsCarousel({ products, category, title }: ProductsCarouselProps) {
+export function ProductsCarousel({ products, category, title, hasShowMore = false }: ProductsCarouselProps) {
     const sliderRef = useRef<Slider>(null)
     const productsFiltered = products.filter((product) => product.category === category) // DA MIGLIORARE PER CROSS-CATEGORY
     const productsSliced = productsFiltered?.slice(0, 8) // PRODOTTI MAX DA MOSTRARE -> taglia la chiamata dal primo elemento fino a X
+
+    const hasShowMoreBtn = hasShowMore ? "block" : "hidden"
+
 
     const settings = {
         dots: true,
@@ -86,7 +90,7 @@ export function ProductsCarousel({ products, category, title }: ProductsCarousel
                 <div className="absolute md:top-0 right-0 flex items-center gap-3 z-10">
                     <CarouselArrow action={() => sliderRef.current?.slickPrev()} alt="Prev Arrow" icon={arrowLeftIcon} />
                     <CarouselArrow action={() => sliderRef.current?.slickNext()} alt="Next Arrow" icon={arrowRightIcon} />
-                    <Link to={`/category/${category}`} className="leading-none flex items-center"><b>Show More</b></Link>
+                    <Link to={`/category/${category}`} className={`leading-none flex items-center ${hasShowMoreBtn}`}><b>Show More</b></Link>
                 </div>
             </div>
             <div >

@@ -94,12 +94,10 @@ const productsSlice = createSlice({
         builder.addCase(getProductByIdAsync.pending, () => {
             console.log("getProductById.pending")
         }).addCase(getProductByIdAsync.fulfilled, (state, action: PayloadAction<Product>) => {
-            console.log("action payload", action.payload)
             state.product = action.payload
         })
     }
 })
-
 
 
 export const { renameProduct, addProduct } = productsSlice.actions

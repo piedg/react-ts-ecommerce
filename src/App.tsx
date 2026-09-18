@@ -10,7 +10,8 @@ import { SectionContainer } from './components/SectionContainer/SectionContainer
 import { addProduct, renameProduct, getProductsAsync, getProductsByCategoryAsync } from './state/products/productsSlice';
 import { ProductsCarousel } from './components/ProductsCarousel/ProductsCarousel';
 import { useEffect } from 'react';
-
+import { ProductsList } from './components/ProductsList/ProductsList';
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>()
@@ -23,9 +24,11 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <NavHeader />
       <Navbar />
       <Outlet />
+
       <SectionContainer>
         <button onClick={() => dispatch(renameProduct({ productId: 10000, newTitle: "My New Fake product" }))}>Rename Product</button>
         <button onClick={() => dispatch(addProduct({
@@ -45,6 +48,11 @@ function App() {
       <SectionContainer>
         <ProductsCarousel products={productsByCategory} category='smartphones' />
       </SectionContainer>
+
+      <SectionContainer>
+        <ProductsList products={products} />
+      </SectionContainer>
+
       <Footer />
     </>
   )
