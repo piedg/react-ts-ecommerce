@@ -10,6 +10,8 @@ import { ErrorPage } from './pages/ErrorPage.tsx';
 import { CategoryPage } from './pages/CategoryPage.tsx';
 import { productsLoader } from './loaders/productsLoader.ts';
 import { categoryLoader } from './loaders/categoryLoader.ts';
+import { Provider } from 'react-redux';
+import { store } from './state/store.ts';
 
 const router = createBrowserRouter([
   {
@@ -37,8 +39,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ProductsProvider>
-      <RouterProvider router={router} />
-    </ProductsProvider>
+    <Provider store={store}>
+      <ProductsProvider>
+        <RouterProvider router={router} />
+      </ProductsProvider>
+    </Provider>
   </StrictMode>,
 )

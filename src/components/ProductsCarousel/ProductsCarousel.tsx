@@ -36,7 +36,7 @@ type ProductsCarouselProps = {
 
 export function ProductsCarousel({ products, category, title }: ProductsCarouselProps) {
     const sliderRef = useRef<Slider>(null)
-    const productsFiltered = products.filter((product) => product.category === category)
+    const productsFiltered = products.filter((product) => product.category === category) // DA MIGLIORARE PER CROSS-CATEGORY
     const productsSliced = productsFiltered?.slice(0, 8) // PRODOTTI MAX DA MOSTRARE -> taglia la chiamata dal primo elemento fino a X
 
     const settings = {
