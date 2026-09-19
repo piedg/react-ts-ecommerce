@@ -1,28 +1,27 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import type { AppDispatch, RootState } from "../state/store";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductByIdAsync } from "../state/products/productsSlice";
 import { ProductDetails } from "../components/ProductDetails/ProductDetails";
 import { SectionContainer } from "../components/SectionContainer/SectionContainer";
 import { ProductGallery } from "../components/ProductGallery/ProductGallery";
+import { useGetProductByIdQuery } from "../services/products";
+import { ProductTile } from "../components/ProductTile/ProductTile";
 
 
 export function ProductPage() {
     const { id } = useParams()
-    const dispatch = useDispatch<AppDispatch>()
-    const { product } = useSelector((state: RootState) => state.products)
+    const { data } = useGetProductByIdQuery(Number(id))
 
-    useEffect(() => {
-        dispatch(getProductByIdAsync(Number(id)))
-    }, [dispatch, id])
-
-    if (!product) return <p>Caricamento...</p>
+    if (!data) return <p>Caricamento...</p>
 
     return (
-        <SectionContainer isFlexRow >
-            <ProductGallery product={product} />
-            <ProductDetails product={product} />
-        </SectionContainer>
+        <>
+            <SectionContainer isFlexRow >
+                <ProductGallery product={data} />
+                <ProductDetails product={data} />
+            </SectionContainer>
+            <SectionContainer>
+                <ProductTile product={data} />
+            </SectionContainer>
+        </>
+
     )
 }
